@@ -12,7 +12,7 @@ https://www.cambridge.org/core/journals/european-psychiatry/article/treatment-ga
 
 Csajbók, Z., Kagstrom, A., Kåreholt, I., Pawłowski, B., Marečková, K., & Cermakova, P. Sex differences in the association of childhood socioeconomic position and later-life depressive symptoms in Europe: the mediating effect of education. Social Psychiatry and Psychiatric Epidemiology, 1-11.
 https://link.springer.com/article/10.1007/s00127-020-02018-0
-- multiple moderated mediation model to test the alleviating effect of education against the deteriorating factor of childhood hardship on later-life depressive symptoms (across sex and European regions)
+- multiple mediation model to test the alleviating effect of education against the deteriorating factor of childhood hardship on later-life depressive symptoms (across sex and European regions)
 - missing data imputation to investigate if the non-random missingness introduces a bias in the results
 
 Csajbók, Z., & Berkics, M. (2017). Factor, factor, on the whole, who's the best fitting of all?: Factors of mate preferences in a large sample. Personality and Individual Differences, 114, 92-102.
