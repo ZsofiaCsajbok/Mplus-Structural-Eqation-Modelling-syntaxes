@@ -1,0 +1,40 @@
+TITLE:	Multiple mediation model
+
+DATA:	FILE IS SES_depression.dat; !SHARE data, see availability in the research paper
+FORMAT is 1F1.0 1F3.0 1F2.0 1F6.2 1F12.2 1F11.5 1F6.2  1F1.0  4F2.0  11F1.0 1F4.0;
+
+VARIABLE:	
+NAMES ARE 
+sex age Depr SEP
+NETw zNETw BMI IADL chron 
+edu child 
+grip inact relstat
+smoke alc work rural mental dementia
+obes EU history dateSES
+;
+
+MISSING is blank; 
+
+usevariables =
+sep edu age depr IADL chron;
+
+useobservation = sex eq 1; !or 2
+
+Analysis:   
+Estimator = MLR;
+
+MODEL:	
+
+depr ON sep edu age chron IADL; 
+edu ON sep;
+chron IADL on edu sep age;
+
+edu with age;
+sep with age;
+IADL with chron;
+
+Model indirect:
+depr ind sep;
+
+Output: standardized modindices tech4 CINTERVAL(symmetric);
+
