@@ -1,0 +1,70 @@
+TITLE:	MVS Study 1 full pathmodel
+
+DATA:	FILE IS mvs1131vegso_4mp.dat;
+FORMAT is 48F8.0;
+
+VARIABLE:	
+NAMES ARE kor nem isk lak mvs1-mvs4 ros1-ros10
+lone1-lone8 soi1-soi9 swls1-swls5 hope1-hope8;
+missing is blank;
+
+usevariables = 
+mvs1-mvs4 ros1-ros10 lone1-lone8 
+soi1 soi3-soi9 swls1-swls5;
+
+Analysis:   
+Estimator = mlr;
+Iterations = 1000000;
+
+
+MODEL:	
+
+!MVS:
+mvs BY mvs1* mvs2 mvs3 mvs4;
+mvs@1;
+
+!Rosenberg 1 main self-esteem and 2 positive/negative methodological factors:
+sesteem by ros1* ros2-ros10;
+sesteem@1;
+SEpos by ros1* ros2 ros4 ros6 ros7;
+sepos@1;
+SEneg by ros3* ros5 ros8 ros9 ros10;
+seneg@1;
+sesteem with sepos@0;
+sesteem with seneg@0;
+sepos with seneg@0;
+
+!Loneliness:
+loness by lone1* lone2-lone8;
+loness@1;
+
+
+!Sociosexual orientation 3 factors (behavior, attitude, desire):
+soibeh by soi1* soi3;
+soibeh@1;
+soiatt by soi4* soi5 soi6;
+soiatt@1;
+soides by soi7* soi8 soi9;
+soides@1;
+
+!satisfaction with life scale (SWLS):
+swls by swls1* swls2-swls5;
+swls@1;
+
+!Rosenberg self-esteem methodological factors constrains:
+sepos with mvs@0;
+sepos with loness@0;
+sepos with soibeh@0;
+sepos with soiatt@0;
+sepos with soides@0;
+sepos with swls@0;
+
+seneg with mvs@0;
+seneg with loness@0;
+seneg with soibeh@0;
+seneg with soiatt@0;
+seneg with soides@0;
+seneg with swls@0;
+
+Output: standardized modindices tech4;
+
