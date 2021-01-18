@@ -1,0 +1,45 @@
+TITLE:	full pathmodel
+
+DATA:	FILE IS selfidat_new.dat; !data is not openly accessible
+FORMAT is 24F4.0 1F8.2 5F4.0;
+
+VARIABLE:	
+NAMES ARE id age sex
+selfi1-selfi5
+aff anx alc subs
+edu urban work singl social
+event event4
+inact diet smoke sumdis sumdis2
+whodas whodas2 childr
+psych psy GP
+;
+
+MISSING is ALL(9999); 
+
+usevariables =
+selfi1 selfi2 selfi3 selfi4
+age sex edu urban work singl
+social childr inact diet smoke
+sumdis2 event4 whodas2  
+gp psy psych;
+
+categorical = gp psy psych;
+
+
+Analysis:   
+Estimator = ml;
+
+
+MODEL:	
+selfi BY selfi1* selfi2 selfi3 selfi4;
+selfi@1;
+
+gp psy psych ON selfi;
+gp psy psych ON age sex 
+    edu urban work singl
+    social childr inact diet smoke
+    sumdis2 event4 whodas2;
+
+
+Output: standardized modindices tech4 CINTERVAL(symmetric);
+
