@@ -1,0 +1,72 @@
+TITLE:	dattry
+
+DATA:	FILE IS SES_depression_withmissing.dat;   !SHARE data, check paper for the availability information
+FORMAT is 1F12.0 13F4.0 4F11.5 41F4.0 5F11.5 29F4.0
+          6F8.0 6F8.2 11F11.5 10F4.0;
+
+VARIABLE:	
+NAMES ARE 
+mergeid excluded
+country EU west south scand centr
+sex12 sex01 cohort date 
+age Depr SES
+NETw zNETw BMI IADL chron 
+edu child 
+grip inact relstat
+smoke alc work rural mental dementia
+obes evMental evDement
+eurod1 eurod2 eurod4 eurod5 eurod6
+iadl1 iadl2 iadl4 iadl5 iadl6
+chron1 chron2 chron4 chron5 chron6
+grip1 grip2 grip4 grip5 grip6
+inact1 inact2 inact4 inact5 inact6
+netw1 netw2 netw4 netw5 netw6
+alc1 alc2 alc4 alc5 alc6
+mstat1 mstat2 mstat4 mstat5 mstat6
+bmi1 bmi2 bmi4 bmi5 bmi6
+work1 work2 work4 work5 work6
+rural1 rural2 rural4 rural5 rural6
+mental1 mental2 mental4 mental5 mental6
+demen1 demen2 demen4 demen5 demen6
+wave1 wave2 wave4 wave5 wave6 
+final
+time1 time2 time4 time5 time6
+follow
+zbook zratio zhistory zdate zgrip zratio2 zbook2 
+ratio ratio2 composit SEPold 
+isced iscedC iadlB chronB netwB cohort2 books
+rooms members books2
+;
+
+MISSING is all(-999); 
+
+usevariables =
+south scand centr
+sex01 
+age Depr SES
+zNETw BMI IADL chron 
+edu child 
+grip inact relstat
+smoke alc work rural 
+;
+
+
+
+
+Analysis:   
+type = basic;
+bseed = 304050;
+bconvergence = .05;
+
+Data imputation:
+impute = SES grip rural work BMI inact alc smoke chron;
+ndatasets = 50;
+save = SES_depression_imputed*.dat
+thin = 300;
+
+
+Output: 
+tech8;
+
+Plot:
+type = plot2;
