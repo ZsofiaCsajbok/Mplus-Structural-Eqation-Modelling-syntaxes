@@ -1,0 +1,55 @@
+TITLE: Identifying Latent Trajectories of Depression using GMM
+
+DATA: FILE IS cogndep_covrecoded.dat;     !SHARE data - open access - read research paper for availability info
+FORMAT IS 1F12.0 8F12.3 14F6.0 1F11.5 15F6.0 1F12.0 1F11.5 136F6.0;
+
+VARIABLE: NAMES ARE
+mergeid i s ci cs cprob1-cprob4
+sID oldC euroDW1 euroDW2 euroDW4 euroDW5 euroDW6 euroDW7
+deprMiss deprN sex Bage ageW1
+edu zNetw mstat child grchild job bmi
+chronic IADL maxgr inact smoke alc country 
+var1-var141;
+
+MISSING is blank; 
+
+auxiliary= sID
+sex(R3STEP) Bage(R3STEP) edu(R3STEP) znetW(R3STEP)
+mstat(R3STEP) child(R3STEP) grchild(R3STEP) job(R3STEP)
+bmi(R3STEP) chronic(R3STEP) iadl(R3STEP) maxgr(R3STEP) 
+inact(R3STEP) smoke(R3STEP) alc(R3STEP);
+
+usevariables =
+euroDW1 euroDW2 euroDW4 euroDW5 euroDW6 euroDW7
+sex Bage edu znetW mstat child grchild job
+bmi chronic iadl maxgr inact smoke alc
+;
+
+classes = c (4);
+
+
+ANALYSIS: 
+type = mixture;
+!Starts=400 100; 
+starts=0;
+stiterations = 50;
+processors = 4;
+LRTSTARTS=0 0 400 100;
+optseed = 349263;
+
+MODEL: 
+%OVERALL%
+i s | euroDW1@0 euroDW2* euroDW4* euroDW5* euroDW6* euroDW7@1;
+
+OUTPUT: tech1 tech4 tech11 tech14 CINTERVAL (SYMMETRIC);!  tech8; svalues
+
+Plot: 
+Type is plot3;
+ series is euroDW1(1) euroDW2(2) euroDW4(4) euroDW5(5) euroDW6(6) euroDW7(7);
+
+
+Savedata: file = depression_4class_covariates_new.dat; 
+Format is F12.3;
+                        !saves individual class assignment
+save = cprobabilities;  ! probabilities and estimated class membership
+                        ! to a new external file
