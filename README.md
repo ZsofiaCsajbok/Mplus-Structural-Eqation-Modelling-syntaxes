@@ -1,5 +1,5 @@
 # Mplus-Structural-Eqation-Modelling-syntaxes
-Codes of my Structural Equation Modelling (SEM) projects, mostly published analyses and their associated figures, dashboards.
+Codes of my Structural Equation Modelling (SEM) projects, mostly published analyses and their associated figures.
 
 
 Formánek, T., Csajbók, Z., Wolfová, K., Kučera, M., Tom, S., Aarsland, D., & Cermakova, P. (2020). Trajectories of depressive symptoms and associated patterns of cognitive decline. Scientific reports, 10(1), 1-11.
